@@ -1,55 +1,50 @@
-
-exports.up = function(knex) {
+exports.up = function (knex) {
   return knex.schema
-    .createTable('recipes', tbl => {
+    .createTable("recipes", (tbl) => {
       tbl.increments(); // id
-      tbl.string('name', 128)
-        .notNullable()
-        .unique();
-      tbl.timestamp('created_at').defaultTo(knex.fn.now());
+      tbl.string("name", 128).notNullable().unique();
+      tbl.timestamp("created_at").defaultTo(knex.fn.now());
     })
-    .createTable('steps', tbl => {
+    .createTable("steps", (tbl) => {
       tbl.increments(); // id
-      tbl.integer('recipe_id')
+      tbl
+        .integer("recipe_id")
         .unsigned()
         .notNullable()
-        .references('id')
-        .inTable('recipes')
-        .onDelete('cascade');
-      tbl.integer('step_number')
-        .notNullable();
-      tbl.text('instructions')
-        .notNullable();
+        .references("id")
+        .inTable("recipes")
+        .onDelete("cascade");
+      tbl.integer("step_number").notNullable();
+      tbl.text("instructions").notNullable();
     })
-    .createTable('ingredients', tbl => {
+    .createTable("ingredients", (tbl) => {
       tbl.increments(); // id
-      tbl.string('name', 128)
-        .notNullable()
-        .unique();
+      tbl.string("name", 128).notNullable().unique();
     })
-    .createTable('stepIngredients', tbl => {
+    .createTable("stepIngredients", (tbl) => {
       tbl.increments(); // id
-      tbl.integer('step_id')
+      tbl
+        .integer("step_id")
         .unsigned()
         .notNullable()
-        .references('id')
-        .inTable('steps')
-        .onDelete('cascade');
-      tbl.integer('ingredient_id')
+        .references("id")
+        .inTable("steps")
+        .onDelete("cascade");
+      tbl
+        .integer("ingredient_id")
         .unsigned()
         .notNullable()
-        .references('id')
-        .inTable('ingredients')
-        .onDelete('cascade');
-      tbl.decimal('quantity')
-        .notNullable();
+        .references("id")
+        .inTable("ingredients")
+        .onDelete("cascade");
+      tbl.decimal("quantity").notNullable();
     });
 };
 
-exports.down = function(knex) {
+exports.down = function (knex) {
   return knex.schema
-    .dropTableIfExists('stepIngredients')
-    .dropTableIfExists('ingredients')
-    .dropTableIfExists('steps')
-    .dropTableIfExists('recipes');
+    .dropTableIfExists("stepIngredients")
+    .dropTableIfExists("ingredients")
+    .dropTableIfExists("steps")
+    .dropTableIfExists("recipes");
 };
