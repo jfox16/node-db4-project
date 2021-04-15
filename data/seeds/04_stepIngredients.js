@@ -1,7 +1,6 @@
 
 exports.seed = function(knex) {
-  // Deletes ALL existing entries
-  return knex('stepIngredients').del()
+  return knex('stepIngredients')
     .then(function () {
       // Inserts seed entries
       return knex('stepIngredients').insert([
@@ -20,7 +19,7 @@ exports.seed = function(knex) {
         // Eggplant Parmesan
         { id: 11, step_id: 7, ingredient_id: 5, quantity: 5.0 },
         { id: 12, step_id: 8, ingredient_id: 7, quantity: 0.5 },
-        { id: 13, step_id: 8, ingredient:id: 10, quantity: 0.25}
+        { id: 13, step_id: 8, ingredient_id: 10, quantity: 0.25}
       ]);
     });
 };

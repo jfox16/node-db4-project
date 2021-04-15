@@ -1,7 +1,7 @@
 
 exports.seed = function(knex) {
   // Deletes ALL existing entries
-  return knex('ingredients').del()
+  return knex('ingredients')
     .then(function () {
       // Inserts seed entries
       return knex('ingredients').insert([
@@ -13,7 +13,8 @@ exports.seed = function(knex) {
         { id: 6, name: "Egg" },
         { id: 7, name: "Tomato Sauce" },
         { id: 8, name: "Butter" },
-        { id: 9, name: "Sugar" }
+        { id: 9, name: "Sugar" },
+        { id: 10, name: "Cheese" }
       ]);
     });
 };
